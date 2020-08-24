@@ -32,25 +32,41 @@ init {
 }
 
 startup {
-	settings.Add("list", true, "Split configuration:");
-	settings.Add("sound", true, "Step away from sound panel after Atrus leaves.", "list");
-	settings.Add("tomahnaNight", true, "Transition to night in Tomahna.", "list");
-	settings.Add("toSpire", true, "Link into Spire", "list");
-	settings.Add("conductor", true, "Step away from conductor box on Spire's faraway island.", "list");
-	settings.Add("fromSpire", true, "Link out of Spire", "list");
-	settings.Add("toSerenia", true, "Link into Serenia", "list");
-	settings.Add("bathy", true, "Reach bathysphere.", "list");
-	settings.Add("colour", true, "Step away from colour puzzle panel.", "list");
-	settings.Add("dream", true, "Lose control to Dream stone in old memory chamber.", "list");
-	settings.Add("end", true, "Trigger ending.", "list");
+	settings.Add("fullgame", true, "Full-game run.");
+	settings.Add("sound", true, "Step away from sound panel after Atrus leaves.", "fullgame");
+	settings.Add("tomahnaNight", true, "Transition to night in Tomahna.", "fullgame");
+	settings.Add("toSpire", true, "Link into Spire", "fullgame");
+	settings.Add("conductor", true, "Step away from conductor box on Spire's faraway island.", "fullgame");
+	settings.Add("fromSpire", true, "Link out of Spire", "fullgame");
+	settings.Add("toSerenia", true, "Link into Serenia", "fullgame");
+	settings.Add("bathy", true, "Reach bathysphere.", "fullgame");
+	settings.Add("colour", true, "Step away from colour puzzle panel.", "fullgame");
+	settings.Add("dream", true, "Lose control to Dream stone in old memory chamber.", "fullgame");
+	settings.Add("end", true, "Trigger ending.", "fullgame");
+	
+	settings.Add("il", false, "Individual-level run.");
+	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
 	
 	settings.Add("menuReset", false, "Reset upon returning to menu.");
 	settings.SetToolTip("menuReset", "Obviously, if you enable this, you must be sure to never accidentally go to the menu during a run. Doesn't reset automatically after finished run.");
 }
 
 start {
-	if (old.cWorld == 6 && old.cZone == 6 && old.cNode == 11 && current.cWorld == 5 && current.cZone == 1 && current.cNode == 10) {
-		return true;
+	if (settings["fullgame"]) {
+		if (old.cWorld == 6 && old.cZone == 6 && old.cNode == 11 && current.cWorld == 5 && current.cZone == 1 && current.cNode == 10) {
+			return true;
+		}
+	} else if (settings["il"]) {
+		if (old.cWorld == 1 && current.cWorld == 2) {
+			// Tomahna to Haven
+			return true;
+		} else if (old.cWorld == 1 && current.cWorld == 3) {
+			// Tomahna to Spire
+			return true;
+		} else if (old.cWorld == 1 && current.cWorld == 4) {
+			// Tomahna to Serenia
+			return true;
+		}
 	}
 }
 
@@ -63,36 +79,49 @@ isLoading {
 }
 
 split {
-	if (settings["sound"] && current.cWorld == 5 && current.cZone == 2 && old.lNode == 30 && current.lNode == 130) {
-		// Step away from sound panel after Atrus leaves
-		return true;
-	} else if (settings["tomahnaNight"] && old.lWorld == 5 && current.lWorld == 1) {
-		// Tomahna day to night
-		return true;
-	} else if (settings["toSpire"] && old.lWorld == 1 && current.lWorld == 3) {
-		// Tomahna to Spire
-		return true;
-	} else if (settings["conductor"] && current.cWorld == 3 && current.cZone == 4 && old.lNode == 130 && current.lNode == 120) {
-		// Step away from conductor box on island
-		return true;
-	} else if (settings["fromSpire"] && old.lWorld == 3 && current.lWorld == 1) {
-		// Spire to Tomahna
-		return true;
-	} else if (settings["toSerenia"] && old.lWorld == 1 && current.lWorld == 4) {
-		// Tomahna to Serenia
-		return true;
-	} else if (settings["bathy"] && current.cWorld == 4 && current.cZone == 6 && old.lNode == 50 && current.lNode == 250) {
-		// Reach bathysphere
-		return true;
-	} else if (settings["colour"] && current.cWorld == 4 && current.cZone == 6 && old.lNode == 61 && current.lNode == 60) {
-		// Finish colour puzzle
-		return true;
-	} else if (settings["dream"] && current.cWorld == 4 && current.cZone == 6 && current.cNode == 220 && old.cameraAuto == 0 && current.cameraAuto == 1) {
-		// Lose control to Dream stone
-		return true;
-	} else if (settings["end"] && current.cWorld == 4 && current.cZone == 6 && old.lNode == 220 && current.lNode == 210) {
-		// Trigger ending
-		return true;
+	if (settings["fullgame"]) {
+		if (settings["sound"] && current.cWorld == 5 && current.cZone == 2 && old.lNode == 30 && current.lNode == 130) {
+			// Step away from sound panel after Atrus leaves
+			return true;
+		} else if (settings["tomahnaNight"] && old.lWorld == 5 && current.lWorld == 1) {
+			// Tomahna day to night
+			return true;
+		} else if (settings["toSpire"] && old.lWorld == 1 && current.lWorld == 3) {
+			// Tomahna to Spire
+			return true;
+		} else if (settings["conductor"] && current.cWorld == 3 && current.cZone == 4 && old.lNode == 130 && current.lNode == 120) {
+			// Step away from conductor box on island
+			return true;
+		} else if (settings["fromSpire"] && old.lWorld == 3 && current.lWorld == 1) {
+			// Spire to Tomahna
+			return true;
+		} else if (settings["toSerenia"] && old.lWorld == 1 && current.lWorld == 4) {
+			// Tomahna to Serenia
+			return true;
+		} else if (settings["bathy"] && current.cWorld == 4 && current.cZone == 6 && old.lNode == 50 && current.lNode == 250) {
+			// Reach bathysphere
+			return true;
+		} else if (settings["colour"] && current.cWorld == 4 && current.cZone == 6 && old.lNode == 61 && current.lNode == 60) {
+			// Finish colour puzzle
+			return true;
+		} else if (settings["dream"] && current.cWorld == 4 && current.cZone == 6 && current.cNode == 220 && old.cameraAuto == 0 && current.cameraAuto == 1) {
+			// Lose control to Dream stone
+			return true;
+		} else if (settings["end"] && current.cWorld == 4 && current.cZone == 6 && old.lNode == 220 && current.lNode == 210) {
+			// Trigger ending
+			return true;
+		}
+	} else if (settings["il"]) {
+		if (old.lWorld == 2 && current.lWorld == 1) {
+			// Haven to Tomahna
+			return true;
+		} else if (old.lWorld == 3 && current.lWorld == 1) {
+			// Spire to Tomahna
+			return true;
+		} else if (current.cWorld == 4 && current.cZone == 6 && current.cNode == 220 && old.cameraAuto == 0 && current.cameraAuto == 1) {
+			// Lose control to Dream stone
+			return true;
+		}
 	}
 }
 
