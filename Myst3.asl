@@ -40,16 +40,16 @@ init {
 }
 
 startup {
-	settings.Add("list", true, "Split configuration:");
-	settings.Add("toho2leis", false, "Link from Tomahna to J'nanin.", "list");
-	settings.Add("lemt2mais", true, "Link from J'nanin to Amateria.", "list");
-	settings.Add("mato2leos", true, "Link from Amateria to J'nanin.", "list");
-	settings.Add("lelt2lidr", true, "Link from J'nanin to Edanna.", "list");
-	settings.Add("line2leos", true, "Link from Edanna to J'nanin.", "list");
-	settings.Add("leet2ensi", true, "Link from J'nanin to Voltaic.", "list");
-	settings.Add("enli2leos", true, "Link from Voltaic to J'nanin.", "list");
-	settings.Add("leos2nach", false, "Link from J'nanin to Narayan.", "list");
-	settings.Add("end", true, "Lose control to ending cutscene.", "list");
+	settings.Add("fullgame", true, "Full-game run.");
+	settings.Add("toho2leis", false, "Link from Tomahna to J'nanin.", "fullgame");
+	settings.Add("lemt2mais", true, "Link from J'nanin to Amateria.", "fullgame");
+	settings.Add("mato2leos", true, "Link from Amateria to J'nanin.", "fullgame");
+	settings.Add("lelt2lidr", true, "Link from J'nanin to Edanna.", "fullgame");
+	settings.Add("line2leos", true, "Link from Edanna to J'nanin.", "fullgame");
+	settings.Add("leet2ensi", true, "Link from J'nanin to Voltaic.", "fullgame");
+	settings.Add("enli2leos", true, "Link from Voltaic to J'nanin.", "fullgame");
+	settings.Add("leos2nach", false, "Link from J'nanin to Narayan.", "fullgame");
+	settings.Add("end", true, "Lose control to ending cutscene.", "fullgame");
 	settings.SetToolTip("end", "This autosplitter is not aware of if you get good ending or not, it will simply split when the ending cutscene is triggered.");
 	
 	settings.Add("il", false, "Individual-level run.");
