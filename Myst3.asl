@@ -60,8 +60,24 @@ startup {
 }
 
 start {
-	if (old.room == 901 && old.node == 100 && current.room != 901) {
-		return true;
+	if (settings["fullgame"]) {
+		if (old.room == 901 && old.node == 100 && current.room != 901) {
+			return true;
+		}
+	} else if (settings["il"]) {
+		if (old.room == 505 && current.room == 1002) {
+			// J'nanin to Amateria
+			return true;
+		} else if (old.room == 504 && current.room == 601) {
+			// J'nanin to Edanna
+			return true;
+		} else if (old.room == 503 && current.room == 701) {
+			// J'nanin to Voltaic
+			return true;
+		} else if (old.room == 502 && current.room == 801) {
+			// J'nanin to Narayan
+			return true;
+		}
 	}
 }
 
