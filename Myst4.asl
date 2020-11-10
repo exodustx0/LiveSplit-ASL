@@ -28,6 +28,7 @@ init {
 		version = "25th Anniversary";
 	} else {
 		print("Unsupported version.");
+		version = "Unknown (contact Exodustx0)";
 	}
 }
 
@@ -49,6 +50,10 @@ startup {
 	
 	settings.Add("menuReset", false, "Reset upon returning to menu.");
 	settings.SetToolTip("menuReset", "Obviously, if you enable this, you must be sure to never accidentally go to the menu during a run. Doesn't reset automatically after finished run.");
+}
+
+update {
+	if (version == "Unknown (contact Exodustx0)") return false;
 }
 
 start {
