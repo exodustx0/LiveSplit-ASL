@@ -14,8 +14,7 @@ state("residualvm", "Steam (25th Anniv.)") {
 }
 
 init {
-	// I robbed this md5 code from Gelly's Myst autosplitter who robbed it from CptBrian's RotN autosplitter
-	// Shoutouts to them
+	// Get the game executable's MD5 hash and print it
 	byte[] exeMD5HashBytes = new byte[0];
 	using (var md5 = System.Security.Cryptography.MD5.Create()) {
 		using (var s = File.Open(modules.First().FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
@@ -25,6 +24,7 @@ init {
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
 	print("MD5Hash: " + MD5Hash.ToString());
 	
+	// Check the hash against known versions of the game
 	if (MD5Hash == "67BAFA45FC3EE1F4211A26FCC65CF73E") {
 		print("GOG version.");
 		version = "GOG (25th Anniv.)";
@@ -41,7 +41,7 @@ init {
 }
 
 startup {
-	settings.Add("fullgame", true, "Full-game run.");
+	settings.Add("fullgame", true, "Full-game splits");
 	settings.Add("toho2leis", false, "Link from Tomahna to J'nanin.", "fullgame");
 	settings.Add("lemt2mais", true, "Link from J'nanin to Amateria.", "fullgame");
 	settings.Add("mato2leos", true, "Link from Amateria to J'nanin.", "fullgame");
@@ -53,7 +53,7 @@ startup {
 	settings.Add("end", true, "Lose control to ending cutscene.", "fullgame");
 	settings.SetToolTip("end", "This autosplitter is not aware of if you get good ending or not, it will simply split when the ending cutscene is triggered.");
 	
-	settings.Add("il", false, "Individual-level run.");
+	settings.Add("il", false, "Individual-level splits");
 	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
 	
 	settings.Add("menuReset", false, "Reset upon returning to menu.");
@@ -61,6 +61,7 @@ startup {
 }
 
 update {
+	// If version is unknown, force autosplitter to deactivate
 	if (version == "Unknown (contact Exodustx0)") return false;
 }
 

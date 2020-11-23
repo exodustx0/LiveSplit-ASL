@@ -12,8 +12,7 @@ state("Myst4", "25th Anniversary") {
 }
 
 init {
-	// I robbed this md5 code from Gelly's Myst autosplitter who robbed it from CptBrian's RotN autosplitter
-	// Shoutouts to them
+	// Get the game executable's MD5 hash and print it
 	byte[] exeMD5HashBytes = new byte[0];
 	using (var md5 = System.Security.Cryptography.MD5.Create()) {
 		using (var s = File.Open(modules.First().FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
@@ -23,6 +22,7 @@ init {
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
 	print("MD5Hash: " + MD5Hash.ToString());
 	
+	// Check the hash against known versions of the game
 	if (MD5Hash == "4DBD3A95ACDD65D2B710FE81360FF833") {
 		print("25th Anniversary version.");
 		version = "25th Anniversary";
@@ -33,7 +33,7 @@ init {
 }
 
 startup {
-	settings.Add("fullgame", true, "Full-game run.");
+	settings.Add("fullgame", true, "Full-game splits");
 	settings.Add("sound", true, "Step away from sound panel after Atrus leaves.", "fullgame");
 	settings.Add("tomahnaNight", true, "Transition to night in Tomahna.", "fullgame");
 	settings.Add("toSpire", true, "Link into Spire", "fullgame");
@@ -45,7 +45,7 @@ startup {
 	settings.Add("dream", true, "Lose control to Dream stone in old memory chamber.", "fullgame");
 	settings.Add("end", true, "Trigger ending.", "fullgame");
 	
-	settings.Add("il", false, "Individual-level run.");
+	settings.Add("il", false, "Individual-level splits");
 	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
 	
 	settings.Add("menuReset", false, "Reset upon returning to menu.");
@@ -53,6 +53,7 @@ startup {
 }
 
 update {
+	// If version is unknown, force autosplitter to deactivate
 	if (version == "Unknown (contact Exodustx0)") return false;
 }
 
