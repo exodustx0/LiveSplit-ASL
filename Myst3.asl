@@ -117,7 +117,9 @@ split {
 			// Trigger ending cutscene; doesn't check for good ending, just *an* ending
 			return true;
 		}
-	} else if (settings["il"]) {
+	}
+	
+	if (settings["il"]) {
 		if (old.room == 1006 && current.room == 502) {
 			// Amateria done
 			return true;

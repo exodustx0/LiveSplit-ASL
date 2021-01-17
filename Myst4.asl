@@ -62,7 +62,9 @@ start {
 		if (old.cWorld == 6 && old.cZone == 6 && old.cNode == 11 && current.cWorld == 5 && current.cZone == 1 && current.cNode == 10) {
 			return true;
 		}
-	} else if (settings["il"]) {
+	}
+	
+	if (settings["il"]) {
 		if (old.cWorld == 1 && current.cWorld == 2) {
 			// Tomahna to Haven
 			return true;
@@ -117,7 +119,9 @@ split {
 			// Trigger ending
 			return true;
 		}
-	} else if (settings["il"]) {
+	}
+	
+	if (settings["il"]) {
 		if (old.lWorld == 2 && current.lWorld == 1) {
 			// Haven to Tomahna
 			return true;
