@@ -64,14 +64,8 @@ start {
 	}
 	
 	if (settings["il"]) {
-		if (old.cWorld == 1 && current.cWorld == 2) {
-			// Tomahna to Haven
-			return true;
-		} else if (old.cWorld == 1 && current.cWorld == 3) {
-			// Tomahna to Spire
-			return true;
-		} else if (old.cWorld == 1 && current.cWorld == 4) {
-			// Tomahna to Serenia
+		// All IL runs start with linking from night-time Tomahna to Haven, Spire or Serenia
+		if (old.cWorld == 1 && current.cWorld > 1 && current.cWorld <= 4) {
 			return true;
 		}
 	}
