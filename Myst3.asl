@@ -22,7 +22,6 @@ init {
 		} 
 	}
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
-	print("MD5Hash: " + MD5Hash.ToString());
 	
 	// Check the hash against known versions of the game
 	if (MD5Hash == "67BAFA45FC3EE1F4211A26FCC65CF73E") {
@@ -35,7 +34,7 @@ init {
 		print("Steam version.");
 		version = "Steam (25th Anniv.)";
 	} else {
-		print("Unsupported version.");
+		print("Unsupported version. MD5 hash: " + MD5Hash.ToString());
 		version = "Unknown (contact Exodustx0)";
 	}
 }
