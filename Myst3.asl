@@ -64,9 +64,6 @@ startup {
 	
 	settings.Add("il", false, "Individual-level splits");
 	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
-	
-	settings.Add("menuReset", false, "Reset upon returning to menu.");
-	settings.SetToolTip("menuReset", "Obviously, if you enable this, you must be sure to never accidentally go to the menu during a run. Doesn't reset automatically after finished run.");
 }
 
 update {
@@ -142,12 +139,5 @@ split {
 			// Narayan done
 			return true;
 		}
-	}
-}
-
-reset {
-	if (settings["menuReset"] && old.room != 901 && current.room == 901 && old.room != 401) {
-		// Reset when transition to menu, except when after credits
-		return true;
 	}
 }
