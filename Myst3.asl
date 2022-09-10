@@ -1,16 +1,22 @@
 state("residualvm", "GOG (25th Anniv.)") {
 	int node: "residualvm.exe", 0x0071B5A8, 0x4C, 0x16C;
 	int room: "residualvm.exe", 0x0071B5A8, 0x4C, 0x168;
+	int saavedroState: "residualvm.exe", 0x0071B5A8, 0x4C, 0x7EC;
+	int releeshahnState: "residualvm.exe", 0x0071B5A8, 0x4C, 0x7F4;
 }
 
 state("residualvm", "DVD (25th Anniv.)") {
 	int node: "residualvm.exe", 0x004ED0A8, 0x4C, 0x16C;
 	int room: "residualvm.exe", 0x004ED0A8, 0x4C, 0x168;
+	int saavedroState: "residualvm.exe", 0x004ED0A8, 0x4C, 0x7EC;
+	int releeshahnState: "residualvm.exe", 0x004ED0A8, 0x4C, 0x7F4;
 }
 
 state("residualvm", "Steam (25th Anniv.)") {
 	int node: "residualvm.exe", 0x004EC0A8, 0x4C, 0x16C;
 	int room: "residualvm.exe", 0x004EC0A8, 0x4C, 0x168;
+	int saavedroState: "residualvm.exe", 0x004EC0A8, 0x4C, 0x7EC;
+	int releeshahnState: "residualvm.exe", 0x004EC0A8, 0x4C, 0x7F4;
 }
 
 init {
@@ -54,8 +60,7 @@ startup {
 	settings.Add("leet2ensi", true, "Link from J'nanin to Voltaic.", "fullgame");
 	settings.Add("enli2leos", true, "Link from Voltaic to J'nanin.", "fullgame");
 	settings.Add("leos2nach", false, "Link from J'nanin to Narayan.", "fullgame");
-	settings.Add("end", true, "Lose control to ending cutscene.", "fullgame");
-	settings.SetToolTip("end", "This autosplitter is not aware of if you get good ending or not, it will simply split when the ending cutscene is triggered.");
+	settings.Add("end", true, "Trigger ending cutscene after getting Releeshahn and freeing Saavedro.", "fullgame");
 	
 	settings.Add("il", false, "Individual-level splits");
 	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
@@ -117,8 +122,8 @@ split {
 		} else if (settings["leos2nach"] && old.room == 502 && current.room == 801) {
 			// J'nanin to Narayan
 			return true;
-		} else if (settings["end"] && current.room == 401 && old.node == 1 && current.node != 1) {
-			// Trigger ending cutscene; doesn't check for good ending, just *an* ending
+		} else if (settings["end"] && current.room == 401 && old.node == 1 && current.node != 1 && current.saavedroState == 2 && current.releeshahnState != 0) {
+			// Trigger ending cutscene
 			return true;
 		}
 	}
