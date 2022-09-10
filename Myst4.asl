@@ -20,7 +20,7 @@ init {
 		} 
 	}
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
-	
+
 	// Check the hash against known versions of the game
 	switch (MD5Hash) {
 	case "4DBD3A95ACDD65D2B710FE81360FF833":
@@ -46,10 +46,10 @@ startup {
 	settings.Add("colour", true, "Step away from colour puzzle panel.", "fullgame");
 	settings.Add("dream", true, "Lose control to Dream stone in old memory chamber.", "fullgame");
 	settings.Add("end", true, "Trigger ending.", "fullgame");
-	
+
 	settings.Add("il", false, "Individual-level splits");
 	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
-	
+
 	settings.Add("menuReset", false, "Reset upon returning to menu.");
 	settings.SetToolTip("menuReset", "Obviously, if you enable this, you must be sure to never accidentally go to the menu during a run. Doesn't reset automatically after finished run.");
 }
@@ -65,7 +65,7 @@ start {
 			return true;
 		}
 	}
-	
+
 	if (settings["il"]) {
 		// All IL runs start with linking from night-time Tomahna to Haven, Spire or Serenia
 		if (old.cWorld == 1 && current.cWorld > 1 && current.cWorld <= 4) {
@@ -116,7 +116,7 @@ split {
 			return true;
 		}
 	}
-	
+
 	if (settings["il"]) {
 		if (old.lWorld == 2 && current.lWorld == 1) {
 			// Haven to Tomahna

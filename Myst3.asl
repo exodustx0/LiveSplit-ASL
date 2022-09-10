@@ -28,7 +28,7 @@ init {
 		} 
 	}
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
-	
+
 	// Check the hash against known versions of the game
 	switch (MD5Hash) {
 	case "67BAFA45FC3EE1F4211A26FCC65CF73E":
@@ -61,7 +61,7 @@ startup {
 	settings.Add("enli2leos", true, "Link from Voltaic to J'nanin.", "fullgame");
 	settings.Add("leos2nach", false, "Link from J'nanin to Narayan.", "fullgame");
 	settings.Add("end", true, "Trigger ending cutscene after getting Releeshahn and freeing Saavedro.", "fullgame");
-	
+
 	settings.Add("il", false, "Individual-level splits");
 	settings.SetToolTip("il", "This autosplitter will start the timer when you enter any of the IL ages, and split when you exit it.");
 }
@@ -124,7 +124,7 @@ split {
 			return true;
 		}
 	}
-	
+
 	if (settings["il"]) {
 		if (old.room == 1006 && current.room == 502) {
 			// Amateria done
