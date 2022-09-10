@@ -53,10 +53,10 @@ init {
 startup {
 	settings.Add("fullgame", true, "Full-game splits");
 	settings.Add("toho2leis", false, "Link from Tomahna to J'nanin.", "fullgame");
-	settings.Add("lemt2mais", true, "Link from J'nanin to Amateria.", "fullgame");
-	settings.Add("mato2leos", true, "Link from Amateria to J'nanin.", "fullgame");
 	settings.Add("lelt2lidr", true, "Link from J'nanin to Edanna.", "fullgame");
 	settings.Add("line2leos", true, "Link from Edanna to J'nanin.", "fullgame");
+	settings.Add("lemt2mais", true, "Link from J'nanin to Amateria.", "fullgame");
+	settings.Add("mato2leos", true, "Link from Amateria to J'nanin.", "fullgame");
 	settings.Add("leet2ensi", true, "Link from J'nanin to Voltaic.", "fullgame");
 	settings.Add("enli2leos", true, "Link from Voltaic to J'nanin.", "fullgame");
 	settings.Add("leos2nach", false, "Link from J'nanin to Narayan.", "fullgame");
@@ -98,17 +98,17 @@ split {
 		if (settings["toho2leis"] && old.room == 301 && current.room == 501) {
 			// Tomahna to J'nanin
 			return true;
-		} else if (settings["lemt2mais"] && old.room == 505 && current.room == 1002) {
-			// J'nanin to Amateria
-			return true;
-		} else if (settings["mato2leos"] && old.room == 1006 && current.room == 502) {
-			// Amateria to J'nanin
-			return true;
 		} else if (settings["lelt2lidr"] && old.room == 504 && current.room == 601) {
 			// J'nanin to Edanna
 			return true;
 		} else if (settings["line2leos"] && old.room == 605 && current.room == 502) {
 			// Edanna to J'nanin
+			return true;
+		} else if (settings["lemt2mais"] && old.room == 505 && current.room == 1002) {
+			// J'nanin to Amateria
+			return true;
+		} else if (settings["mato2leos"] && old.room == 1006 && current.room == 502) {
+			// Amateria to J'nanin
 			return true;
 		} else if (settings["leet2ensi"] && old.room == 503 && current.room == 701) {
 			// J'nanin to Voltaic
