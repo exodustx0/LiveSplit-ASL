@@ -24,18 +24,23 @@ init {
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
 	
 	// Check the hash against known versions of the game
-	if (MD5Hash == "67BAFA45FC3EE1F4211A26FCC65CF73E") {
+	switch (MD5Hash) {
+	case "67BAFA45FC3EE1F4211A26FCC65CF73E":
 		print("GOG version.");
 		version = "GOG (25th Anniv.)";
-	} else if (MD5Hash == "60C57D14483233F5C71B7B5A04938621") {
+		break;
+	case "60C57D14483233F5C71B7B5A04938621":
 		print("DVD version.");
 		version = "DVD (25th Anniv.)";
-	} else if (MD5Hash == "F280D868DF58DC05DD55352DDA474433") {
+		break;
+	case "F280D868DF58DC05DD55352DDA474433":
 		print("Steam version.");
 		version = "Steam (25th Anniv.)";
-	} else {
+		break;
+	default:
 		print("Unsupported version. MD5 hash: " + MD5Hash.ToString());
-		version = "Unknown (contact Exodustx0)";
+		version = "Unknown (contact exodustx0)";
+		break;
 	}
 }
 
@@ -61,7 +66,7 @@ startup {
 
 update {
 	// If version is unknown, force autosplitter to deactivate
-	if (version == "Unknown (contact Exodustx0)") return false;
+	if (version == "Unknown (contact exodustx0)") return false;
 }
 
 start {

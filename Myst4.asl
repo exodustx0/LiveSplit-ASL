@@ -22,12 +22,15 @@ init {
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
 	
 	// Check the hash against known versions of the game
-	if (MD5Hash == "4DBD3A95ACDD65D2B710FE81360FF833") {
+	switch (MD5Hash) {
+	case "4DBD3A95ACDD65D2B710FE81360FF833":
 		print("25th Anniversary version.");
 		version = "25th Anniversary";
-	} else {
+		break;
+	default:
 		print("Unsupported version. MD5 hash: " + MD5Hash.ToString());
-		version = "Unknown (contact Exodustx0)";
+		version = "Unknown (contact exodustx0)";
+		break;
 	}
 }
 
@@ -53,7 +56,7 @@ startup {
 
 update {
 	// If version is unknown, force autosplitter to deactivate
-	if (version == "Unknown (contact Exodustx0)") return false;
+	if (version == "Unknown (contact exodustx0)") return false;
 }
 
 start {
@@ -130,7 +133,7 @@ split {
 
 reset {
 	if (settings["menuReset"] && old.cWorld != 6 && current.cWorld == 6 && !(old.cWorld == 4 && old.cZone == 6 && old.cNode == 210)) {
-		// Reset when transition to menu
+		// Reset when transition to menu (except after credits)
 		return true;
 	}
 }
