@@ -11,7 +11,6 @@ Collective repo for all my LiveSplit autosplitters.
 - Contains individual-level splits:
   - Entering and exiting Amateria, Edanna, Voltaic and Narayan
 - All splits can be manually enabled or disabled in settings.
-- Resets timer upon entering main menu, except after triggering the ending. Can be disabled in settings.
 
 ## Myst IV: Revelation
 
