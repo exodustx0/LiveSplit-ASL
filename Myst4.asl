@@ -9,6 +9,8 @@ state("Myst4", "25th Anniversary") {
 	int lNode: "m4_ai_global_rd.dll", 0x00079240, 0x7C;
 	// Game has taken control of the camera.
 	int cameraAuto: "m4_thor_rd.dll", 0x001B9944, 0xA8;
+
+	int consolePtr: "m4_thor_rd.dll", 0x001B99B8;
 }
 
 init {
@@ -52,11 +54,22 @@ startup {
 
 	settings.Add("menuReset", false, "Reset upon returning to menu.");
 	settings.SetToolTip("menuReset", "Obviously, if you enable this, you must be sure to never accidentally go to the menu during a run. Doesn't reset automatically after finished run.");
+
+	settings.Add("enableConsole", false, "Enable debug console.");
+	settings.SetToolTip("enableConsole", "Debug console can be (de)activated with the tilde (~) key.");
 }
 
 update {
 	// If version is unknown, force autosplitter to deactivate.
 	if (version == "Unknown (contact exodustx0)") return false;
+
+	IntPtr ptr = (IntPtr)current.consolePtr + 0xAD;
+	byte consoleEnabled = 0;
+	if (memory.ReadValue<byte>(ptr, out consoleEnabled) && (consoleEnabled == 1) != settings["enableConsole"]) {
+		byte b = 0;
+		if (settings["enableConsole"]) b = 1;
+		memory.WriteBytes(ptr, new byte[]{b});
+	}
 }
 
 start {
