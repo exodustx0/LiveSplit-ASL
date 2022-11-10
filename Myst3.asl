@@ -20,7 +20,7 @@ state("residualvm", "Steam (25th Anniv.)") {
 }
 
 init {
-	// Get the game executable's MD5 hash and print it
+	// Get the game executable's MD5 hash and print it.
 	byte[] exeMD5HashBytes = new byte[0];
 	using (var md5 = System.Security.Cryptography.MD5.Create()) {
 		using (var s = File.Open(modules.First().FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
@@ -29,7 +29,7 @@ init {
 	}
 	var MD5Hash = exeMD5HashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
 
-	// Check the hash against known versions of the game
+	// Check the hash against known versions of the game.
 	switch (MD5Hash) {
 	case "67BAFA45FC3EE1F4211A26FCC65CF73E":
 		print("GOG version.");
@@ -52,14 +52,14 @@ init {
 
 startup {
 	settings.Add("fullgame", true, "Full-game splits");
-	settings.Add("toho2leis", false, "Link from Tomahna to J'nanin.", "fullgame");
-	settings.Add("lelt2lidr", true, "Link from J'nanin to Edanna.", "fullgame");
-	settings.Add("line2leos", true, "Link from Edanna to J'nanin.", "fullgame");
-	settings.Add("lemt2mais", true, "Link from J'nanin to Amateria.", "fullgame");
-	settings.Add("mato2leos", true, "Link from Amateria to J'nanin.", "fullgame");
-	settings.Add("leet2ensi", true, "Link from J'nanin to Voltaic.", "fullgame");
-	settings.Add("enli2leos", true, "Link from Voltaic to J'nanin.", "fullgame");
-	settings.Add("leos2nach", false, "Link from J'nanin to Narayan.", "fullgame");
+	settings.Add("TOHO2LEIS", false, "Link from Tomahna to J'nanin.", "fullgame");
+	settings.Add("LELT2LIDR", true, "Link from J'nanin to Edanna.", "fullgame");
+	settings.Add("LINE2LEOS", true, "Link from Edanna to J'nanin.", "fullgame");
+	settings.Add("LEMT2MAIS", true, "Link from J'nanin to Amateria.", "fullgame");
+	settings.Add("MATO2LEOS", true, "Link from Amateria to J'nanin.", "fullgame");
+	settings.Add("LEET2ENSI", true, "Link from J'nanin to Voltaic.", "fullgame");
+	settings.Add("ENLI2LEOS", true, "Link from Voltaic to J'nanin.", "fullgame");
+	settings.Add("LEOS2NACH", false, "Link from J'nanin to Narayan.", "fullgame");
 	settings.Add("end", true, "Trigger ending cutscene after getting Releeshahn and freeing Saavedro.", "fullgame");
 
 	settings.Add("il", false, "Individual-level splits");
@@ -67,7 +67,7 @@ startup {
 }
 
 update {
-	// If version is unknown, force autosplitter to deactivate
+	// If version is unknown, force autosplitter to deactivate.
 	if (version == "Unknown (contact exodustx0)") return false;
 }
 
@@ -78,16 +78,16 @@ start {
 		}
 	} else if (settings["il"]) {
 		if (old.room == 505 && current.room == 1002) {
-			// J'nanin to Amateria
+			// J'nanin to Amateria.
 			return true;
 		} else if (old.room == 504 && current.room == 601) {
-			// J'nanin to Edanna
+			// J'nanin to Edanna.
 			return true;
 		} else if (old.room == 503 && current.room == 701) {
-			// J'nanin to Voltaic
+			// J'nanin to Voltaic.
 			return true;
 		} else if (old.room == 502 && current.room == 801) {
-			// J'nanin to Narayan
+			// J'nanin to Narayan.
 			return true;
 		}
 	}
@@ -95,48 +95,48 @@ start {
 
 split {
 	if (settings["fullgame"]) {
-		if (settings["toho2leis"] && old.room == 301 && current.room == 501) {
-			// Tomahna to J'nanin
+		if (settings["TOHO2LEIS"] && old.room == 301 && current.room == 501) {
+			// Tomahna to J'nanin.
 			return true;
-		} else if (settings["lelt2lidr"] && old.room == 504 && current.room == 601) {
-			// J'nanin to Edanna
+		} else if (settings["LELT2LIDR"] && old.room == 504 && current.room == 601) {
+			// J'nanin to Edanna.
 			return true;
-		} else if (settings["line2leos"] && old.room == 605 && current.room == 502) {
-			// Edanna to J'nanin
+		} else if (settings["LINE2LEOS"] && old.room == 605 && current.room == 502) {
+			// Edanna to J'nanin.
 			return true;
-		} else if (settings["lemt2mais"] && old.room == 505 && current.room == 1002) {
-			// J'nanin to Amateria
+		} else if (settings["LEMT2MAIS"] && old.room == 505 && current.room == 1002) {
+			// J'nanin to Amateria.
 			return true;
-		} else if (settings["mato2leos"] && old.room == 1006 && current.room == 502) {
-			// Amateria to J'nanin
+		} else if (settings["MATO2LEOS"] && old.room == 1006 && current.room == 502) {
+			// Amateria to J'nanin.
 			return true;
-		} else if (settings["leet2ensi"] && old.room == 503 && current.room == 701) {
-			// J'nanin to Voltaic
+		} else if (settings["LEET2ENSI"] && old.room == 503 && current.room == 701) {
+			// J'nanin to Voltaic.
 			return true;
-		} else if (settings["enli2leos"] && old.room == 708 && current.room == 502) {
-			// Voltaic to J'nanin
+		} else if (settings["ENLI2LEOS"] && old.room == 708 && current.room == 502) {
+			// Voltaic to J'nanin.
 			return true;
-		} else if (settings["leos2nach"] && old.room == 502 && current.room == 801) {
-			// J'nanin to Narayan
+		} else if (settings["LEOS2NACH"] && old.room == 502 && current.room == 801) {
+			// J'nanin to Narayan.
 			return true;
 		} else if (settings["end"] && current.room == 401 && old.node == 1 && current.node != 1 && current.saavedroState == 2 && current.releeshahnState != 0) {
-			// Trigger ending cutscene
+			// Trigger ending cutscene.
 			return true;
 		}
 	}
 
 	if (settings["il"]) {
 		if (old.room == 1006 && current.room == 502) {
-			// Amateria done
+			// Amateria done.
 			return true;
 		} else if (old.room == 605 && current.room == 502) {
-			// Edanna done
+			// Edanna done.
 			return true;
 		} else if (old.room == 708 && current.room == 502) {
-			// VOltaic done
+			// VOltaic done.
 			return true;
 		} else if (old.room == 801 && current.room == 401) {
-			// Narayan done
+			// Narayan done.
 			return true;
 		}
 	}
