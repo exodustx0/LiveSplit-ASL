@@ -13,7 +13,7 @@ Collective repo for all my LiveSplit autosplitters.
 
 ## Myst IV: Revelation
 
-- Starts timer upon loading intro cinematic. Set start timer to -5.2 seconds!
+- Starts timer upon the first frame of the intro cinematic.
 - Contains full-game splits (configurable in settings):
   - All age transitions (only those we need for the speedrun)
   - Stepping away from the sound panel after Atrus leaves

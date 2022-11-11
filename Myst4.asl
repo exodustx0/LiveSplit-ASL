@@ -74,7 +74,7 @@ update {
 
 start {
 	if (settings["fullgame"]) {
-		if (old.cWorld == 6 && old.cZone == 6 && old.cNode == 11 && current.cWorld == 5 && current.cZone == 1 && current.cNode == 10) {
+		if (current.cWorld == 5 && current.cZone == 1 && current.cNode == 10 && old.cameraAuto == 0 && current.cameraAuto == 1) {
 			return true;
 		}
 	}
